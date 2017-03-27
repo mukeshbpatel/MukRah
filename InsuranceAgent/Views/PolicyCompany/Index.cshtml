@@ -1,0 +1,45 @@
+﻿@model IEnumerable<InsuranceAgent.Models.PolicyCompany>
+
+@{
+    ViewBag.Title = "Insurance Company";
+}
+
+<h2>Insurance Company</h2>
+
+<div style="width:98%; text-align:right; padding-right:5px;">    
+    <a href='PolicyCompany/Create'><img src="@Url.Content("~/Images/add.png")" alt="add" title="add new insurance company..." style="border: solid 0px #ffffff;"/></a>  
+</div>
+<table class="tblList" style="width:100%">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CompanyID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Company)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>        
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompanyID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Company)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>        
+        <td>
+            <a href='PolicyCompany/Details/@item.CompanyID'><img src="@Url.Content("~/Images/details.png")" alt="details" title="details..." style="border: solid 0px #ffffff;"/></a>
+            <a href='PolicyCompany/Edit/@item.CompanyID'><img src="@Url.Content("~/Images/edit.png")" alt="edit" title="edit..." style="border: solid 0px #ffffff;"/></a>
+			<a href='PolicyCompany/Delete/@item.CompanyID'><img src="@Url.Content("~/Images/delete.png")" alt="delete" title="delete..." style="border: solid 0px #ffffff;"/></a>
+        </td>
+    </tr>
+}
+
+</table>

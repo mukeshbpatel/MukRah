@@ -1,0 +1,943 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="InsuranceAgentModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="InsuranceAgentModelStoreContainer">
+          <EntitySet Name="CustomerMedia" EntityType="InsuranceAgentModel.Store.CustomerMedia" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CustomerPolicy" EntityType="InsuranceAgentModel.Store.CustomerPolicy" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CustomerPolicyInsured" EntityType="InsuranceAgentModel.Store.CustomerPolicyInsured" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="CustomerPolicyMedia" EntityType="InsuranceAgentModel.Store.CustomerPolicyMedia" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Customers" EntityType="InsuranceAgentModel.Store.Customers" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Families" EntityType="InsuranceAgentModel.Store.Families" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PolicyCompany" EntityType="InsuranceAgentModel.Store.PolicyCompany" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PolicyMaster" EntityType="InsuranceAgentModel.Store.PolicyMaster" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PolicyPayments" EntityType="InsuranceAgentModel.Store.PolicyPayments" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="PolicyTypes" EntityType="InsuranceAgentModel.Store.PolicyTypes" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_CustomerMedia_Customers" Association="InsuranceAgentModel.Store.FK_CustomerMedia_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="CustomerMedia" EntitySet="CustomerMedia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerPolicy_Customers" Association="InsuranceAgentModel.Store.FK_CustomerPolicy_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="CustomerPolicy" EntitySet="CustomerPolicy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerPolicy_PolicyMaster" Association="InsuranceAgentModel.Store.FK_CustomerPolicy_PolicyMaster">
+            <End Role="PolicyMaster" EntitySet="PolicyMaster" />
+            <End Role="CustomerPolicy" EntitySet="CustomerPolicy" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerPolicyMedia_CustomerPolicy" Association="InsuranceAgentModel.Store.FK_CustomerPolicyMedia_CustomerPolicy">
+            <End Role="CustomerPolicy" EntitySet="CustomerPolicy" />
+            <End Role="CustomerPolicyMedia" EntitySet="CustomerPolicyMedia" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Families" Association="InsuranceAgentModel.Store.FK_Customers_Families">
+            <End Role="Families" EntitySet="Families" />
+            <End Role="Customers" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolicyMaster_PolicyCompany" Association="InsuranceAgentModel.Store.FK_PolicyMaster_PolicyCompany">
+            <End Role="PolicyCompany" EntitySet="PolicyCompany" />
+            <End Role="PolicyMaster" EntitySet="PolicyMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolicyMaster_PolicyTypes" Association="InsuranceAgentModel.Store.FK_PolicyMaster_PolicyTypes">
+            <End Role="PolicyTypes" EntitySet="PolicyTypes" />
+            <End Role="PolicyMaster" EntitySet="PolicyMaster" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolicyPayments_CustomerPolicy" Association="InsuranceAgentModel.Store.FK_PolicyPayments_CustomerPolicy">
+            <End Role="CustomerPolicy" EntitySet="CustomerPolicy" />
+            <End Role="PolicyPayments" EntitySet="PolicyPayments" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CustomerMedia">
+          <Key>
+            <PropertyRef Name="MediaID" />
+          </Key>
+          <Property Name="MediaID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="MediaType" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="MediaTitle" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="FileName" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="FileData" Type="varbinary(max)" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedByID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerPolicy">
+          <Key>
+            <PropertyRef Name="CustomerPolicyID" />
+          </Key>
+          <Property Name="CustomerPolicyID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerID" Type="int" Nullable="false" />
+          <Property Name="PolicyID" Type="int" Nullable="false" />
+          <Property Name="PolicyNumber" Type="nvarchar" MaxLength="500" />
+          <Property Name="IssueDate" Type="date" Nullable="false" />
+          <Property Name="ExpireDate" Type="date" />
+          <Property Name="PremiumFrequency" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="VechileRegistrationNumber" Type="nvarchar" MaxLength="200" />
+          <Property Name="SumInsuredAmount" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="ODPremiumAmount" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="NetPremiumAmount" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="TPPremiumAmount" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="ServiceTax" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="TotalPremiumAmount" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="InsuredName" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="PolicyStatus" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="PolicySubmitedDate" Type="date" />
+          <Property Name="LastPolicyNumber" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsHardCopy" Type="bit" />
+          <Property Name="IsRenewedPolicyReceived" Type="bit" />
+          <Property Name="IsDelivered" Type="bit" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="UDK1" Type="nvarchar(max)" />
+          <Property Name="UDK2" Type="nvarchar(max)" />
+          <Property Name="UDK3" Type="nvarchar(max)" />
+          <Property Name="UDK4" Type="nvarchar(max)" />
+          <Property Name="UDK5" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdateByID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerPolicyInsured">
+          <Key>
+            <PropertyRef Name="InsuredID" />
+          </Key>
+          <Property Name="InsuredID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerPolicyID" Type="int" Nullable="false" />
+          <Property Name="InsuredName" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="Relation" Type="nchar" MaxLength="50" />
+          <Property Name="RelationCustomerID" Type="int" />
+          <Property Name="UDK1" Type="nvarchar(max)" />
+          <Property Name="UDK2" Type="nvarchar(max)" />
+          <Property Name="UDK3" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedByID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerPolicyMedia">
+          <Key>
+            <PropertyRef Name="MediaID" />
+          </Key>
+          <Property Name="MediaID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerPolicyID" Type="int" Nullable="false" />
+          <Property Name="MediaType" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="MediaTitle" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="FileName" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="FileData" Type="varbinary(max)" Nullable="false" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedByID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="MiddleName" Type="nvarchar" MaxLength="100" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="100" />
+          <Property Name="FamilyID" Type="int" />
+          <Property Name="Gender" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="DOB" Type="datetime" />
+          <Property Name="Address1" Type="nvarchar" MaxLength="500" />
+          <Property Name="Address2" Type="nvarchar" MaxLength="500" />
+          <Property Name="City" Type="nvarchar" MaxLength="200" />
+          <Property Name="HomePhone" Type="nvarchar" MaxLength="100" />
+          <Property Name="PrimaryMobile" Type="nvarchar" MaxLength="100" />
+          <Property Name="SecondaryMobile" Type="nvarchar" MaxLength="100" />
+          <Property Name="Email" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Profession" Type="nvarchar" MaxLength="500" />
+          <Property Name="Occupation" Type="nvarchar" MaxLength="500" />
+          <Property Name="Height" Type="nvarchar" MaxLength="50" />
+          <Property Name="Weight" Type="nvarchar" MaxLength="50" />
+          <Property Name="SkinColor" Type="nvarchar" MaxLength="50" />
+          <Property Name="VisibleMark" Type="nvarchar" MaxLength="50" />
+          <Property Name="BloodGroup" Type="nvarchar" MaxLength="50" />
+          <Property Name="Details" Type="nvarchar(max)" />
+          <Property Name="Relation" Type="nvarchar" MaxLength="50" />
+          <Property Name="RelationCustomerID" Type="int" />
+          <Property Name="UDK1" Type="nvarchar(max)" />
+          <Property Name="UDK2" Type="nvarchar(max)" />
+          <Property Name="UDK3" Type="nvarchar(max)" />
+          <Property Name="UDK4" Type="nvarchar(max)" />
+          <Property Name="UDK5" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedByID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Families">
+          <Key>
+            <PropertyRef Name="FamilyID" />
+          </Key>
+          <Property Name="FamilyID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FamilyName" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Area" Type="nvarchar" MaxLength="200" />
+          <Property Name="MasterID" Type="int" />
+          <Property Name="UDK1" Type="nvarchar(max)" />
+          <Property Name="UDK2" Type="nvarchar(max)" />
+          <Property Name="UDK3" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedByID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PolicyCompany">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Company" Type="nvarchar" Nullable="false" MaxLength="200" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="UDK1" Type="nvarchar(max)" />
+          <Property Name="UDK2" Type="nvarchar(max)" />
+          <Property Name="UDK3" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedByID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PolicyMaster">
+          <Key>
+            <PropertyRef Name="PolicyID" />
+          </Key>
+          <Property Name="PolicyID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PolicyName" Type="nvarchar" Nullable="false" MaxLength="500" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="PolicyTypeID" Type="int" Nullable="false" />
+          <Property Name="LastCompanyID" Type="int" />
+          <Property Name="UDK1" Type="nvarchar(max)" />
+          <Property Name="UDK2" Type="nvarchar(max)" />
+          <Property Name="UDK3" Type="nvarchar(max)" />
+          <Property Name="UDK4" Type="nvarchar(max)" />
+          <Property Name="UDK5" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedByID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PolicyPayments">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PaymentDate" Type="date" Nullable="false" />
+          <Property Name="CustomerPolicyID" Type="int" Nullable="false" />
+          <Property Name="PaymentAmount" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="PaymentDetails" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="CommissionAmount" Type="decimal" Nullable="false" Scale="2" />
+          <Property Name="CommissionDate" Type="date" />
+          <Property Name="CommissionDetails" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UDK1" Type="nvarchar(max)" />
+          <Property Name="UDK2" Type="nvarchar(max)" />
+          <Property Name="UDK3" Type="nvarchar(max)" />
+          <Property Name="UDK4" Type="nvarchar(max)" />
+          <Property Name="UDK5" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedByID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PolicyTypes">
+          <Key>
+            <PropertyRef Name="PolicyTypeID" />
+          </Key>
+          <Property Name="PolicyTypeID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="PolicyTypeName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="UDK1" Type="nvarchar(max)" />
+          <Property Name="UDK2" Type="nvarchar(max)" />
+          <Property Name="UDK3" Type="nvarchar(max)" />
+          <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedDate" Type="datetime" Nullable="false" />
+          <Property Name="UpdatedByID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CustomerMedia_Customers">
+          <End Role="Customers" Type="InsuranceAgentModel.Store.Customers" Multiplicity="1" />
+          <End Role="CustomerMedia" Type="InsuranceAgentModel.Store.CustomerMedia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="CustomerMedia">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerPolicy_Customers">
+          <End Role="Customers" Type="InsuranceAgentModel.Store.Customers" Multiplicity="1" />
+          <End Role="CustomerPolicy" Type="InsuranceAgentModel.Store.CustomerPolicy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="CustomerPolicy">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerPolicy_PolicyMaster">
+          <End Role="PolicyMaster" Type="InsuranceAgentModel.Store.PolicyMaster" Multiplicity="1" />
+          <End Role="CustomerPolicy" Type="InsuranceAgentModel.Store.CustomerPolicy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PolicyMaster">
+              <PropertyRef Name="PolicyID" />
+            </Principal>
+            <Dependent Role="CustomerPolicy">
+              <PropertyRef Name="PolicyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerPolicyMedia_CustomerPolicy">
+          <End Role="CustomerPolicy" Type="InsuranceAgentModel.Store.CustomerPolicy" Multiplicity="1" />
+          <End Role="CustomerPolicyMedia" Type="InsuranceAgentModel.Store.CustomerPolicyMedia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerPolicy">
+              <PropertyRef Name="CustomerPolicyID" />
+            </Principal>
+            <Dependent Role="CustomerPolicyMedia">
+              <PropertyRef Name="CustomerPolicyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Families">
+          <End Role="Families" Type="InsuranceAgentModel.Store.Families" Multiplicity="0..1" />
+          <End Role="Customers" Type="InsuranceAgentModel.Store.Customers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Families">
+              <PropertyRef Name="FamilyID" />
+            </Principal>
+            <Dependent Role="Customers">
+              <PropertyRef Name="FamilyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolicyMaster_PolicyCompany">
+          <End Role="PolicyCompany" Type="InsuranceAgentModel.Store.PolicyCompany" Multiplicity="1" />
+          <End Role="PolicyMaster" Type="InsuranceAgentModel.Store.PolicyMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PolicyCompany">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="PolicyMaster">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolicyMaster_PolicyTypes">
+          <End Role="PolicyTypes" Type="InsuranceAgentModel.Store.PolicyTypes" Multiplicity="1" />
+          <End Role="PolicyMaster" Type="InsuranceAgentModel.Store.PolicyMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PolicyTypes">
+              <PropertyRef Name="PolicyTypeID" />
+            </Principal>
+            <Dependent Role="PolicyMaster">
+              <PropertyRef Name="PolicyTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolicyPayments_CustomerPolicy">
+          <End Role="CustomerPolicy" Type="InsuranceAgentModel.Store.CustomerPolicy" Multiplicity="1" />
+          <End Role="PolicyPayments" Type="InsuranceAgentModel.Store.PolicyPayments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerPolicy">
+              <PropertyRef Name="CustomerPolicyID" />
+            </Principal>
+            <Dependent Role="PolicyPayments">
+              <PropertyRef Name="CustomerPolicyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InsuranceAgentModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="InsuranceAgentEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="CustomerMedias" EntityType="InsuranceAgentModel.CustomerMedia" />
+          <EntitySet Name="CustomerPolicies" EntityType="InsuranceAgentModel.CustomerPolicy" />
+          <EntitySet Name="CustomerPolicyInsureds" EntityType="InsuranceAgentModel.CustomerPolicyInsured" />
+          <EntitySet Name="CustomerPolicyMedias" EntityType="InsuranceAgentModel.CustomerPolicyMedia" />
+          <EntitySet Name="Customers" EntityType="InsuranceAgentModel.Customer" />
+          <EntitySet Name="Families" EntityType="InsuranceAgentModel.Family" />
+          <EntitySet Name="PolicyCompanies" EntityType="InsuranceAgentModel.PolicyCompany" />
+          <EntitySet Name="PolicyMasters" EntityType="InsuranceAgentModel.PolicyMaster" />
+          <EntitySet Name="PolicyPayments" EntityType="InsuranceAgentModel.PolicyPayment" />
+          <EntitySet Name="PolicyTypes" EntityType="InsuranceAgentModel.PolicyType" />
+          <AssociationSet Name="FK_CustomerMedia_Customers" Association="InsuranceAgentModel.FK_CustomerMedia_Customers">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="CustomerMedia" EntitySet="CustomerMedias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerPolicy_Customers" Association="InsuranceAgentModel.FK_CustomerPolicy_Customers">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="CustomerPolicy" EntitySet="CustomerPolicies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerPolicy_PolicyMaster" Association="InsuranceAgentModel.FK_CustomerPolicy_PolicyMaster">
+            <End Role="PolicyMaster" EntitySet="PolicyMasters" />
+            <End Role="CustomerPolicy" EntitySet="CustomerPolicies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerPolicyMedia_CustomerPolicy" Association="InsuranceAgentModel.FK_CustomerPolicyMedia_CustomerPolicy">
+            <End Role="CustomerPolicy" EntitySet="CustomerPolicies" />
+            <End Role="CustomerPolicyMedia" EntitySet="CustomerPolicyMedias" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolicyPayments_CustomerPolicy" Association="InsuranceAgentModel.FK_PolicyPayments_CustomerPolicy">
+            <End Role="CustomerPolicy" EntitySet="CustomerPolicies" />
+            <End Role="PolicyPayment" EntitySet="PolicyPayments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customers_Families" Association="InsuranceAgentModel.FK_Customers_Families">
+            <End Role="Family" EntitySet="Families" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolicyMaster_PolicyCompany" Association="InsuranceAgentModel.FK_PolicyMaster_PolicyCompany">
+            <End Role="PolicyCompany" EntitySet="PolicyCompanies" />
+            <End Role="PolicyMaster" EntitySet="PolicyMasters" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PolicyMaster_PolicyTypes" Association="InsuranceAgentModel.FK_PolicyMaster_PolicyTypes">
+            <End Role="PolicyType" EntitySet="PolicyTypes" />
+            <End Role="PolicyMaster" EntitySet="PolicyMasters" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CustomerMedia">
+          <Key>
+            <PropertyRef Name="MediaID" />
+          </Key>
+          <Property Type="Int32" Name="MediaID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="CustomerID" Nullable="false" />
+          <Property Type="String" Name="MediaType" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MediaTitle" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FileName" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="Binary" Name="FileData" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="UpdatedByID" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="InsuranceAgentModel.FK_CustomerMedia_Customers" FromRole="CustomerMedia" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="CustomerPolicy">
+          <Key>
+            <PropertyRef Name="CustomerPolicyID" />
+          </Key>
+          <Property Type="Int32" Name="CustomerPolicyID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="CustomerID" Nullable="false" />
+          <Property Type="Int32" Name="PolicyID" Nullable="false" />
+          <Property Type="String" Name="PolicyNumber" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="IssueDate" Nullable="false" Precision="0" />
+          <Property Type="DateTime" Name="ExpireDate" Precision="0" />
+          <Property Type="String" Name="PremiumFrequency" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="VechileRegistrationNumber" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="SumInsuredAmount" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="ODPremiumAmount" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="NetPremiumAmount" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TPPremiumAmount" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="ServiceTax" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="Decimal" Name="TotalPremiumAmount" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="String" Name="InsuredName" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PolicyStatus" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="PolicySubmitedDate" Precision="0" />
+          <Property Type="String" Name="LastPolicyNumber" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsHardCopy" />
+          <Property Type="Boolean" Name="IsRenewedPolicyReceived" />
+          <Property Type="Boolean" Name="IsDelivered" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK1" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK2" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK3" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK4" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK5" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="UpdateByID" Nullable="false" />
+          <NavigationProperty Name="Customer" Relationship="InsuranceAgentModel.FK_CustomerPolicy_Customers" FromRole="CustomerPolicy" ToRole="Customer" />
+          <NavigationProperty Name="PolicyMaster" Relationship="InsuranceAgentModel.FK_CustomerPolicy_PolicyMaster" FromRole="CustomerPolicy" ToRole="PolicyMaster" />
+          <NavigationProperty Name="CustomerPolicyMedias" Relationship="InsuranceAgentModel.FK_CustomerPolicyMedia_CustomerPolicy" FromRole="CustomerPolicy" ToRole="CustomerPolicyMedia" />
+          <NavigationProperty Name="PolicyPayments" Relationship="InsuranceAgentModel.FK_PolicyPayments_CustomerPolicy" FromRole="CustomerPolicy" ToRole="PolicyPayment" />
+        </EntityType>
+        <EntityType Name="CustomerPolicyInsured">
+          <Key>
+            <PropertyRef Name="InsuredID" />
+          </Key>
+          <Property Type="Int32" Name="InsuredID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="CustomerPolicyID" Nullable="false" />
+          <Property Type="String" Name="InsuredName" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Relation" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Type="Int32" Name="RelationCustomerID" />
+          <Property Type="String" Name="UDK1" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK2" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK3" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="UpdatedByID" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CustomerPolicyMedia">
+          <Key>
+            <PropertyRef Name="MediaID" />
+          </Key>
+          <Property Type="Int32" Name="MediaID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int32" Name="CustomerPolicyID" Nullable="false" />
+          <Property Type="String" Name="MediaType" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MediaTitle" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="FileName" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="Binary" Name="FileData" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="UpdatedByID" Nullable="false" />
+          <NavigationProperty Name="CustomerPolicy" Relationship="InsuranceAgentModel.FK_CustomerPolicyMedia_CustomerPolicy" FromRole="CustomerPolicyMedia" ToRole="CustomerPolicy" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Type="Int32" Name="CustomerID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FirstName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="MiddleName" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="LastName" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="FamilyID" />
+          <Property Type="String" Name="Gender" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="DOB" Precision="3" />
+          <Property Type="String" Name="Address1" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Address2" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="City" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="HomePhone" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PrimaryMobile" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SecondaryMobile" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Profession" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Occupation" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Height" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Weight" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="SkinColor" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="VisibleMark" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="BloodGroup" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Details" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Relation" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="RelationCustomerID" />
+          <Property Type="String" Name="UDK1" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK2" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK3" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK4" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK5" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="UpdatedByID" Nullable="false" />
+          <NavigationProperty Name="CustomerMedias" Relationship="InsuranceAgentModel.FK_CustomerMedia_Customers" FromRole="Customer" ToRole="CustomerMedia" />
+          <NavigationProperty Name="CustomerPolicies" Relationship="InsuranceAgentModel.FK_CustomerPolicy_Customers" FromRole="Customer" ToRole="CustomerPolicy" />
+          <NavigationProperty Name="Family" Relationship="InsuranceAgentModel.FK_Customers_Families" FromRole="Customer" ToRole="Family" />
+        </EntityType>
+        <EntityType Name="Family">
+          <Key>
+            <PropertyRef Name="FamilyID" />
+          </Key>
+          <Property Type="Int32" Name="FamilyID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FamilyName" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Area" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="MasterID" />
+          <Property Type="String" Name="UDK1" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK2" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK3" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="UpdatedByID" Nullable="false" />
+          <NavigationProperty Name="Customers" Relationship="InsuranceAgentModel.FK_Customers_Families" FromRole="Family" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="PolicyCompany">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Type="Int32" Name="CompanyID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Company" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK1" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK2" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK3" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="UpdatedByID" Nullable="false" />
+          <NavigationProperty Name="PolicyMasters" Relationship="InsuranceAgentModel.FK_PolicyMaster_PolicyCompany" FromRole="PolicyCompany" ToRole="PolicyMaster" />
+        </EntityType>
+        <EntityType Name="PolicyMaster">
+          <Key>
+            <PropertyRef Name="PolicyID" />
+          </Key>
+          <Property Type="Int32" Name="PolicyID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="PolicyName" Nullable="false" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CompanyID" Nullable="false" />
+          <Property Type="Int32" Name="PolicyTypeID" Nullable="false" />
+          <Property Type="Int32" Name="LastCompanyID" />
+          <Property Type="String" Name="UDK1" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK2" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK3" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK4" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK5" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="UpdatedByID" Nullable="false" />
+          <NavigationProperty Name="CustomerPolicies" Relationship="InsuranceAgentModel.FK_CustomerPolicy_PolicyMaster" FromRole="PolicyMaster" ToRole="CustomerPolicy" />
+          <NavigationProperty Name="PolicyCompany" Relationship="InsuranceAgentModel.FK_PolicyMaster_PolicyCompany" FromRole="PolicyMaster" ToRole="PolicyCompany" />
+          <NavigationProperty Name="PolicyType" Relationship="InsuranceAgentModel.FK_PolicyMaster_PolicyTypes" FromRole="PolicyMaster" ToRole="PolicyType" />
+        </EntityType>
+        <EntityType Name="PolicyPayment">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Type="Int32" Name="PaymentID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="PaymentDate" Nullable="false" Precision="0" />
+          <Property Type="Int32" Name="CustomerPolicyID" Nullable="false" />
+          <Property Type="Decimal" Name="PaymentAmount" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="String" Name="PaymentDetails" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Decimal" Name="CommissionAmount" Nullable="false" Precision="18" Scale="2" />
+          <Property Type="DateTime" Name="CommissionDate" Precision="0" />
+          <Property Type="String" Name="CommissionDetails" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK1" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK2" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK3" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK4" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK5" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="UpdatedByID" Nullable="false" />
+          <NavigationProperty Name="CustomerPolicy" Relationship="InsuranceAgentModel.FK_PolicyPayments_CustomerPolicy" FromRole="PolicyPayment" ToRole="CustomerPolicy" />
+        </EntityType>
+        <EntityType Name="PolicyType">
+          <Key>
+            <PropertyRef Name="PolicyTypeID" />
+          </Key>
+          <Property Type="Int32" Name="PolicyTypeID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="PolicyTypeName" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK1" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK2" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UDK3" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="3" />
+          <Property Type="DateTime" Name="UpdatedDate" Nullable="false" Precision="3" />
+          <Property Type="Int32" Name="UpdatedByID" Nullable="false" />
+          <NavigationProperty Name="PolicyMasters" Relationship="InsuranceAgentModel.FK_PolicyMaster_PolicyTypes" FromRole="PolicyType" ToRole="PolicyMaster" />
+        </EntityType>
+        <Association Name="FK_CustomerMedia_Customers">
+          <End Type="InsuranceAgentModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="InsuranceAgentModel.CustomerMedia" Role="CustomerMedia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="CustomerMedia">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerPolicy_Customers">
+          <End Type="InsuranceAgentModel.Customer" Role="Customer" Multiplicity="1" />
+          <End Type="InsuranceAgentModel.CustomerPolicy" Role="CustomerPolicy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="CustomerPolicy">
+              <PropertyRef Name="CustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerPolicy_PolicyMaster">
+          <End Type="InsuranceAgentModel.PolicyMaster" Role="PolicyMaster" Multiplicity="1" />
+          <End Type="InsuranceAgentModel.CustomerPolicy" Role="CustomerPolicy" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PolicyMaster">
+              <PropertyRef Name="PolicyID" />
+            </Principal>
+            <Dependent Role="CustomerPolicy">
+              <PropertyRef Name="PolicyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerPolicyMedia_CustomerPolicy">
+          <End Type="InsuranceAgentModel.CustomerPolicy" Role="CustomerPolicy" Multiplicity="1" />
+          <End Type="InsuranceAgentModel.CustomerPolicyMedia" Role="CustomerPolicyMedia" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerPolicy">
+              <PropertyRef Name="CustomerPolicyID" />
+            </Principal>
+            <Dependent Role="CustomerPolicyMedia">
+              <PropertyRef Name="CustomerPolicyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolicyPayments_CustomerPolicy">
+          <End Type="InsuranceAgentModel.CustomerPolicy" Role="CustomerPolicy" Multiplicity="1" />
+          <End Type="InsuranceAgentModel.PolicyPayment" Role="PolicyPayment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerPolicy">
+              <PropertyRef Name="CustomerPolicyID" />
+            </Principal>
+            <Dependent Role="PolicyPayment">
+              <PropertyRef Name="CustomerPolicyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customers_Families">
+          <End Type="InsuranceAgentModel.Family" Role="Family" Multiplicity="0..1" />
+          <End Type="InsuranceAgentModel.Customer" Role="Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Family">
+              <PropertyRef Name="FamilyID" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="FamilyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolicyMaster_PolicyCompany">
+          <End Type="InsuranceAgentModel.PolicyCompany" Role="PolicyCompany" Multiplicity="1" />
+          <End Type="InsuranceAgentModel.PolicyMaster" Role="PolicyMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PolicyCompany">
+              <PropertyRef Name="CompanyID" />
+            </Principal>
+            <Dependent Role="PolicyMaster">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PolicyMaster_PolicyTypes">
+          <End Type="InsuranceAgentModel.PolicyType" Role="PolicyType" Multiplicity="1" />
+          <End Type="InsuranceAgentModel.PolicyMaster" Role="PolicyMaster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PolicyType">
+              <PropertyRef Name="PolicyTypeID" />
+            </Principal>
+            <Dependent Role="PolicyMaster">
+              <PropertyRef Name="PolicyTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InsuranceAgentModelStoreContainer" CdmEntityContainer="InsuranceAgentEntities">
+          <EntitySetMapping Name="CustomerMedias">
+            <EntityTypeMapping TypeName="InsuranceAgentModel.CustomerMedia">
+              <MappingFragment StoreEntitySet="CustomerMedia">
+                <ScalarProperty Name="UpdatedByID" ColumnName="UpdatedByID" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="FileData" ColumnName="FileData" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="MediaTitle" ColumnName="MediaTitle" />
+                <ScalarProperty Name="MediaType" ColumnName="MediaType" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="MediaID" ColumnName="MediaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerPolicies">
+            <EntityTypeMapping TypeName="InsuranceAgentModel.CustomerPolicy">
+              <MappingFragment StoreEntitySet="CustomerPolicy">
+                <ScalarProperty Name="UpdateByID" ColumnName="UpdateByID" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UDK5" ColumnName="UDK5" />
+                <ScalarProperty Name="UDK4" ColumnName="UDK4" />
+                <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+                <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+                <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="IsDelivered" ColumnName="IsDelivered" />
+                <ScalarProperty Name="IsRenewedPolicyReceived" ColumnName="IsRenewedPolicyReceived" />
+                <ScalarProperty Name="IsHardCopy" ColumnName="IsHardCopy" />
+                <ScalarProperty Name="LastPolicyNumber" ColumnName="LastPolicyNumber" />
+                <ScalarProperty Name="PolicySubmitedDate" ColumnName="PolicySubmitedDate" />
+                <ScalarProperty Name="PolicyStatus" ColumnName="PolicyStatus" />
+                <ScalarProperty Name="InsuredName" ColumnName="InsuredName" />
+                <ScalarProperty Name="TotalPremiumAmount" ColumnName="TotalPremiumAmount" />
+                <ScalarProperty Name="ServiceTax" ColumnName="ServiceTax" />
+                <ScalarProperty Name="TPPremiumAmount" ColumnName="TPPremiumAmount" />
+                <ScalarProperty Name="NetPremiumAmount" ColumnName="NetPremiumAmount" />
+                <ScalarProperty Name="ODPremiumAmount" ColumnName="ODPremiumAmount" />
+                <ScalarProperty Name="SumInsuredAmount" ColumnName="SumInsuredAmount" />
+                <ScalarProperty Name="VechileRegistrationNumber" ColumnName="VechileRegistrationNumber" />
+                <ScalarProperty Name="PremiumFrequency" ColumnName="PremiumFrequency" />
+                <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
+                <ScalarProperty Name="IssueDate" ColumnName="IssueDate" />
+                <ScalarProperty Name="PolicyNumber" ColumnName="PolicyNumber" />
+                <ScalarProperty Name="PolicyID" ColumnName="PolicyID" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="CustomerPolicyID" ColumnName="CustomerPolicyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerPolicyInsureds">
+            <EntityTypeMapping TypeName="InsuranceAgentModel.CustomerPolicyInsured">
+              <MappingFragment StoreEntitySet="CustomerPolicyInsured">
+                <ScalarProperty Name="UpdatedByID" ColumnName="UpdatedByID" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+                <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+                <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+                <ScalarProperty Name="RelationCustomerID" ColumnName="RelationCustomerID" />
+                <ScalarProperty Name="Relation" ColumnName="Relation" />
+                <ScalarProperty Name="InsuredName" ColumnName="InsuredName" />
+                <ScalarProperty Name="CustomerPolicyID" ColumnName="CustomerPolicyID" />
+                <ScalarProperty Name="InsuredID" ColumnName="InsuredID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerPolicyMedias">
+            <EntityTypeMapping TypeName="InsuranceAgentModel.CustomerPolicyMedia">
+              <MappingFragment StoreEntitySet="CustomerPolicyMedia">
+                <ScalarProperty Name="UpdatedByID" ColumnName="UpdatedByID" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="FileData" ColumnName="FileData" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="MediaTitle" ColumnName="MediaTitle" />
+                <ScalarProperty Name="MediaType" ColumnName="MediaType" />
+                <ScalarProperty Name="CustomerPolicyID" ColumnName="CustomerPolicyID" />
+                <ScalarProperty Name="MediaID" ColumnName="MediaID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="InsuranceAgentModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="UpdatedByID" ColumnName="UpdatedByID" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UDK5" ColumnName="UDK5" />
+                <ScalarProperty Name="UDK4" ColumnName="UDK4" />
+                <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+                <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+                <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+                <ScalarProperty Name="RelationCustomerID" ColumnName="RelationCustomerID" />
+                <ScalarProperty Name="Relation" ColumnName="Relation" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+                <ScalarProperty Name="VisibleMark" ColumnName="VisibleMark" />
+                <ScalarProperty Name="SkinColor" ColumnName="SkinColor" />
+                <ScalarProperty Name="Weight" ColumnName="Weight" />
+                <ScalarProperty Name="Height" ColumnName="Height" />
+                <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+                <ScalarProperty Name="Profession" ColumnName="Profession" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SecondaryMobile" ColumnName="SecondaryMobile" />
+                <ScalarProperty Name="PrimaryMobile" ColumnName="PrimaryMobile" />
+                <ScalarProperty Name="HomePhone" ColumnName="HomePhone" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address2" ColumnName="Address2" />
+                <ScalarProperty Name="Address1" ColumnName="Address1" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="FamilyID" ColumnName="FamilyID" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Families">
+            <EntityTypeMapping TypeName="InsuranceAgentModel.Family">
+              <MappingFragment StoreEntitySet="Families">
+                <ScalarProperty Name="UpdatedByID" ColumnName="UpdatedByID" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+                <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+                <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+                <ScalarProperty Name="MasterID" ColumnName="MasterID" />
+                <ScalarProperty Name="Area" ColumnName="Area" />
+                <ScalarProperty Name="FamilyName" ColumnName="FamilyName" />
+                <ScalarProperty Name="FamilyID" ColumnName="FamilyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PolicyCompanies">
+            <EntityTypeMapping TypeName="InsuranceAgentModel.PolicyCompany">
+              <MappingFragment StoreEntitySet="PolicyCompany">
+                <ScalarProperty Name="UpdatedByID" ColumnName="UpdatedByID" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+                <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+                <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PolicyMasters">
+            <EntityTypeMapping TypeName="InsuranceAgentModel.PolicyMaster">
+              <MappingFragment StoreEntitySet="PolicyMaster">
+                <ScalarProperty Name="UpdatedByID" ColumnName="UpdatedByID" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UDK5" ColumnName="UDK5" />
+                <ScalarProperty Name="UDK4" ColumnName="UDK4" />
+                <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+                <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+                <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+                <ScalarProperty Name="LastCompanyID" ColumnName="LastCompanyID" />
+                <ScalarProperty Name="PolicyTypeID" ColumnName="PolicyTypeID" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PolicyName" ColumnName="PolicyName" />
+                <ScalarProperty Name="PolicyID" ColumnName="PolicyID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PolicyPayments">
+            <EntityTypeMapping TypeName="InsuranceAgentModel.PolicyPayment">
+              <MappingFragment StoreEntitySet="PolicyPayments">
+                <ScalarProperty Name="UpdatedByID" ColumnName="UpdatedByID" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UDK5" ColumnName="UDK5" />
+                <ScalarProperty Name="UDK4" ColumnName="UDK4" />
+                <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+                <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+                <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+                <ScalarProperty Name="CommissionDetails" ColumnName="CommissionDetails" />
+                <ScalarProperty Name="CommissionDate" ColumnName="CommissionDate" />
+                <ScalarProperty Name="CommissionAmount" ColumnName="CommissionAmount" />
+                <ScalarProperty Name="PaymentDetails" ColumnName="PaymentDetails" />
+                <ScalarProperty Name="PaymentAmount" ColumnName="PaymentAmount" />
+                <ScalarProperty Name="CustomerPolicyID" ColumnName="CustomerPolicyID" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PolicyTypes">
+            <EntityTypeMapping TypeName="InsuranceAgentModel.PolicyType">
+              <MappingFragment StoreEntitySet="PolicyTypes">
+                <ScalarProperty Name="UpdatedByID" ColumnName="UpdatedByID" />
+                <ScalarProperty Name="UpdatedDate" ColumnName="UpdatedDate" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="UDK3" ColumnName="UDK3" />
+                <ScalarProperty Name="UDK2" ColumnName="UDK2" />
+                <ScalarProperty Name="UDK1" ColumnName="UDK1" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="PolicyTypeName" ColumnName="PolicyTypeName" />
+                <ScalarProperty Name="PolicyTypeID" ColumnName="PolicyTypeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

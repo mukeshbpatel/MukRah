@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>@ViewBag.Title - Insurance Agent</title>
+        <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+        <meta name="viewport" content="width=device-width" />
+        @Styles.Render("~/Content/css")
+        @Styles.Render("~/Content/jquery-ui-css")
+        @Scripts.Render("~/bundles/modernizr")
+        @Scripts.Render("~/bundles/jquery")
+        @Scripts.Render("~/bundles/jqueryui")
+        @*<script src="http://ygconline.com/Scripts/pace.min.js"></script>
+		<link href="http://ygconline.com/Content/pace.css" rel="stylesheet" />*@
+    </head>
+    <body>
+        <header>
+            <div class="content-wrapper">
+                <div class="float-left">
+                    <p class="site-title">@Html.ActionLink("Insurnace Agent", "Index", "Home")</p>
+                </div>
+                <div class="float-right">                        
+                    <nav>
+                        <ul id="menu">
+                            <li><a href='@Url.Action("Index", "Home",null)'><img src="@Url.Content("~/Images/home.png")" alt="home" title="home" style="border: solid 0px #ffffff; width:24px; height:24px;"/></a></li>                            
+                            <li><a href='@Url.Action("Index", "PolicyCompany",null)'><img src="@Url.Content("~/Images/company.png")" alt="company" title="insurance company" style="border: solid 0px #ffffff; width:24px; height:24px;"/></a></li>
+                            <li><a href='@Url.Action("Index", "PolicyType",null)'><img src="@Url.Content("~/Images/policytype.png")" alt="type" title="policy type" style="border: solid 0px #ffffff; width:24px; height:24px;"/></a></li>                            
+                            <li><a href='@Url.Action("Index", "Family",null)'><img src="@Url.Content("~/Images/family.png")" alt="family" title="family" style="border: solid 0px #ffffff; width:24px; height:24px;"/></a></li>
+                            <li><a href='@Url.Action("Index", "Customer",null)'><img src="@Url.Content("~/Images/member.png")" alt="family members" title="family members" style="border: solid 0px #ffffff; width:24px; height:24px;"/></a></li>
+                            <li><a href='@Url.Action("Index", "PolicyMaster",null)'><img src="@Url.Content("~/Images/Loan.png")" alt="policy" title="policy master" style="border: solid 0px #ffffff; width:24px; height:24px;"/></a></li>
+                            <li><a href='@Url.Action("Index", "Payments",null)'><img src="@Url.Content("~/Images/collection.png")" alt="type" title="policy type" style="border: solid 0px #ffffff; width:24px; height:24px;"/></a></li>                            
+                            @*<li><a href='@Url.Action("Index", "Customer",null)'><img src="@Url.Content("~/Images/contribution.png")" alt="customer" title="customer" style="border: solid 0px #ffffff; width:24px; height:24px;"/></a></li>
+                            <li><a href='@Url.Action("DownloadApp","Home",null)'><img src="@Url.Content("~/Images/android.png")" alt="ygcfund app" title="ygcfund android app" style="border: solid 0px #ffffff; width:24px; height:24px;"/></a></li>                                                                                  *@
+                            @Html.Partial("_LoginPartial")
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </header>
+        <div id="body">
+            @RenderSection("featured", required: false)
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
+        <footer>
+            <div class="content-wrapper">
+                <div class="float-left">                    
+                    <div style="margin-top:15px;"><a href="http://www.InsuranceAgent.com">www.InsuranceAgent.com</a> &copy; @DateTime.Now.Year - Insurance Agent</div>
+                    <div style="margin-top:5px;">Email : <a href="mailto:ygcfund@googlegroups.com">MyName@InsuranceAgent.com</a></div>                    
+                </div>
+            </div>
+        </footer>
+        <script>
+            $(document).ready(function () {
+                $("script ~ div").css('display', 'none');
+                $("center a").css('display', 'none');
+                $("#container").css("display", "block");
+            });
+               // $('input').attr('autocomplete','off');
+	    </script>
+        @RenderSection("scripts", required: false)
+    </body>
+</html>

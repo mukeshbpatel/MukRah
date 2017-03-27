@@ -1,0 +1,12 @@
+﻿@if (Request.IsAuthenticated) {    
+        <li><a href='@Url.Action("Profile", "Home",null)'><img src="@Url.Content("~/Images/profile.png")" alt="profile" title="profile" style="border: solid 0px #ffffff; width:24px; height:24px;"/></a></li>
+        <li><a href='@Url.Action("Manage", "Account",null)'><img src="@Url.Content("~/Images/password.png")" alt="password" title="change password" style="border: solid 0px #ffffff; width:24px; height:24px;"/></a></li>
+        @*<li>@Html.ActionLink("Profile", "Profile", "Home", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })</li>*@
+        <li>@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+            @Html.AntiForgeryToken()
+            <a href="javascript:document.getElementById('logoutForm').submit()"><img src="@Url.Content("~/Images/logout.png")" alt="logout" title="logout" style="border: solid 0px #ffffff; width:24px; height:24px;"/></a>
+        }</li>    
+} else {
+   @* <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>    *@
+   <li><a href='@Url.Action("Login", "Account",null)'><img src="@Url.Content("~/Images/login.png")" alt="login" title="login" style="border: solid 0px #ffffff; width:24px; height:24px;"/></a></li>
+}

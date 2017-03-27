@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="02d4bd3bf70d44a0b31ab4c97be7ca12" Name="Diagram1" ZoomLevel="15">
+        <EntityTypeShape EntityType="InsuranceAgentModel.CustomerMedia" Width="1.5" PointX="8.6062293297640178" PointY="3.9745671916634624" />
+        <EntityTypeShape EntityType="InsuranceAgentModel.CustomerPolicy" Width="1.5" PointX="11.74025141435687" PointY="7.3187549595342736" />
+        <EntityTypeShape EntityType="InsuranceAgentModel.CustomerPolicyInsured" Width="1.5" PointX="7.0182149591940526" PointY="27.42691604580121" />
+        <EntityTypeShape EntityType="InsuranceAgentModel.CustomerPolicyMedia" Width="1.5" PointX="1.2628724227020853" PointY="22.402211169899541" />
+        <EntityTypeShape EntityType="InsuranceAgentModel.Customer" Width="1.5" PointX="1.7307434350860973" PointY="5.2549904311331872" />
+        <EntityTypeShape EntityType="InsuranceAgentModel.Family" Width="1.5" PointX="10.82570188065325" PointY="20.493364552265668" />
+        <EntityTypeShape EntityType="InsuranceAgentModel.PolicyCompany" Width="1.5" PointX="11.265250989825116" PointY="7.0885899844991931" />
+        <EntityTypeShape EntityType="InsuranceAgentModel.PolicyMaster" Width="1.5" PointX="5.1482759402823994" PointY="10.217059959758567" />
+        <EntityTypeShape EntityType="InsuranceAgentModel.PolicyPayment" Width="1.5" PointX="9.5422299641846813" PointY="21.681263412200504" />
+        <EntityTypeShape EntityType="InsuranceAgentModel.PolicyType" Width="1.5" PointX="8.1074228529387256" PointY="12.53990255880165" />
+        <AssociationConnector Association="InsuranceAgentModel.FK_CustomerMedia_Customers" />
+        <AssociationConnector Association="InsuranceAgentModel.FK_CustomerPolicy_Customers" />
+        <AssociationConnector Association="InsuranceAgentModel.FK_CustomerPolicy_PolicyMaster" />
+        <AssociationConnector Association="InsuranceAgentModel.FK_CustomerPolicyMedia_CustomerPolicy" />
+        <AssociationConnector Association="InsuranceAgentModel.FK_PolicyPayments_CustomerPolicy" />
+        <AssociationConnector Association="InsuranceAgentModel.FK_Customers_Families" />
+        <AssociationConnector Association="InsuranceAgentModel.FK_PolicyMaster_PolicyCompany" />
+        <AssociationConnector Association="InsuranceAgentModel.FK_PolicyMaster_PolicyTypes" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

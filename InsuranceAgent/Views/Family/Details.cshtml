@@ -1,0 +1,78 @@
+﻿@model InsuranceAgent.Models.Family
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Family</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.FamilyName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.FamilyName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Area)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Area)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.MasterID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MasterID)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UDK1)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UDK1)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UDK2)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UDK2)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UDK3)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UDK3)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreatedDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreatedDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdatedDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdatedDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdatedByID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdatedByID)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.FamilyID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

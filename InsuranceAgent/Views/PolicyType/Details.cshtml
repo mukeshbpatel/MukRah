@@ -1,0 +1,50 @@
+﻿@model InsuranceAgent.Models.PolicyType
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>PolicyType</legend>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.PolicyTypeName)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PolicyTypeName)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.Description)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.CreatedDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CreatedDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdatedDate)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdatedDate)
+    </div>
+
+    <div class="display-label">
+         @Html.DisplayNameFor(model => model.UpdatedByID)
+    </div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.UpdatedByID)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.PolicyTypeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

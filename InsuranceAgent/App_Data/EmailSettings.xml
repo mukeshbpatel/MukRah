@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<EmailSettings>
+<EmailSetting>
+  <SMTP>smtp.mail.yahoo.com</SMTP>
+  <UserName>ygcfund@yahoo.com</UserName>
+  <Password>y@cfund!@#$</Password>  
+  <Port>587</Port>
+  <EnableSsl>true</EnableSsl>
+  <FromEmail>ygcfund@yahoo.com</FromEmail>
+  <FromEmailName>Yashraj Green Castle</FromEmailName>
+  <BCCEmail>mukeshbpatel@gmail.com</BCCEmail>
+  <BccEmailName>Mukesh Patel</BccEmailName>
+</EmailSetting>
+ </EmailSettings>

@@ -1,0 +1,45 @@
+﻿@model InsuranceAgent.Models.Family
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Family</legend>
+
+        @Html.HiddenFor(model => model.FamilyID)
+        @Html.HiddenFor(model => model.CreatedDate)
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FamilyName)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.FamilyName)
+            @Html.ValidationMessageFor(model => model.FamilyName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Area)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Area)
+            @Html.ValidationMessageFor(model => model.Area)
+        </div>
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
